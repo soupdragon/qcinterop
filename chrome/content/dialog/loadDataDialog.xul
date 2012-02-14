@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+
+<dialog xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	id="..." title="Load Interop Data"
+	onload="window.sizeToContent();onLoad();"
+	buttons="accept,cancel"
+	ondialogcancel="return onCancel();"
+	ondialogaccept="return onAccept();"
+	width="400"
+	>
+
+<script src="chrome://qcinterop/content/dialog/loadDataDialog.js"/>
+
+<label value="Select the local or remote location of an Illumina Interop QC data directory"/>
+<separator class="thin"/>
+<hbox flex="1">
+
+	<vbox>
+		<radiogroup>
+		  <radio label="Local: " value="directory" selected="true" oncommand="enableDirectorySource();"/>
+		  <radio label="URL: " value="url"
+				oncommand="enableUrlSource();"/>
+		</radiogroup>
+	</vbox>
+
+		<vbox flex="1">
+			<hbox flex="3">
+				<textbox id="dirname" value="/nfs/avc_private/avc/Desktop/InterOp" width="600"/>
+				<button id="dirbrowse" label="Browse..." onclick='getInterOpDir();'/>
+			</hbox>
+			<hbox flex="3">
+				<textbox id="urlname" value="http://sfweb.internal.sanger.ac.uk:9000/nfs/sf37/ILorHSany_sf37/outgoing/120117_HS28_07383_B_C0ARBACXX/InterOp/" flex="3" disabled="true"/>
+			</hbox>
+		</vbox>
+
+</hbox>
+<separator class="groove-thin"/>
+
+
+</dialog>

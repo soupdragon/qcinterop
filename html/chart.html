@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>QC Data</title>
+    <script src="resource://d3/d3.js" type="text/javascript" charset="utf-8"></script>
+    <script src="resource://d3/d3.layout.js" type="text/javascript" charset="utf-8"></script>
+
+  </head>
+
+	<style>
+.chart rect {
+   stroke: white;
+   fill: steelblue;
+ }
+
+body {
+  font: 10px sans-serif;
+}
+
+rect {
+  fill: steelblue;
+  stroke: white;
+}
+
+line {
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+</style>
+
+  <body>
+
+	<div id="qc_data_status">No data</div>
+
+	<input type="button" value="Refresh" onclick="refereshQMetricGraph();"/>
+
+	<div id="qcchart"/>
+
+    <script type="text/javascript">
+
+		var QCDATA = {};
+		window.addEventListener('message',receiveMessage,false);
+
+		function receiveMessage(evt){
+			switch (evt.data['event']){
+				case "storeQcData":
+					QCDATA[evt.data['qctype']] = evt.data['data'];
+				    document.getElementById("qc_data_status").innerHTML = evt.data['qctype'] + " QC data loaded";
+					break;
+				case "dataComplete":
+				    document.getElementById("qc_data_status").value = "QC data load complete";
+					alert("All QC data received");
+					break;
+				default:
+					dump("Unknown event received by display page!" + '\n');
+			}
+		}
+
+
+
+		function refereshQMetricGraph(){
+
+
+			var data = QCDATA['QMetrics'];
+
+			var chart = d3.select("body").append("svg")
+				 .attr("class", "chart")
+				 .attr("width", 420)
+				 .attr("height", 20 * data.length);
+
+			var x = d3.scale.linear()
+				 .domain([0, d3.max(data)])
+				 .range([0, 420]);
+
+			var y = d3.scale.ordinal()
+				 .domain(data)
+				 .rangeBands([0, 120]);
+
+			 chart.selectAll("rect")
+				 .data(data)
+				 .enter().append("rect")
+				 .attr("y", function(d, i) { return i * 20; })
+				 .attr("width", x)
+				 .attr("height", 20);
+
+
+
+
+			chart.selectAll("text")
+				 .data(data)
+				 .enter().append("text")
+				 .attr("x", x)
+				 .attr("y", function(d,i) { return i *20 + 10; })
+				 .attr("dx", -3) // padding-right
+				 .attr("dy", ".35em") // vertical-align: middle
+				 .attr("text-anchor", "end") // text-align: right
+				 .text(String);
+
+
+}
+
+
+    </script>
+  </body>
+</html>

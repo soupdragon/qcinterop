@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<!--
+ /*====================================================================
+ *  Author: Tony Cox (avc@sanger.ac.uk)
+ *  Copyright (c) 2006: Genome Research Ltd.
+ * Xulnpg is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * or see the on-line version at http://www.gnu.org/copyleft/gpl.txt
+ *====================================================================
+ * This file is part of the Xulnpg package and was written by
+ * 	Tony Cox (Sanger Institute, UK) avc@sanger.ac.uk
+ *
+ * Description: Provides interface for monitoring data in Illumina pipeline
+ *
+ * Exported functions: None
+ * HISTORY:
+ *====================================================================
+ */
+-->
+<overlay id="menuoverlay" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+
+  <menubar id="menubar1">
+    <menu id="file-menu" label="File" accesskey="f">
+      <menupopup id="file-popup">
+        <menuitem label="Exit" accesskey="x" oncommand="appExit();"/>
+      </menupopup>
+    </menu>
+    <menu id="tools-menu" label="Tools" accesskey="t">
+      <menupopup id="tools-popup">
+        <menuitem label="Preferences..." accesskey="p"  oncommand="var features='chrome,titlebar,toolbar,centerscreen,modal';window.openDialog('chrome://xulnpg/content/npgprefs.xul','Preferences', features);"/>
+      </menupopup>
+    </menu>
+    <spacer flex="1"/>
+    <menu id="help-menu" label="Help" accesskey="h">
+      <menupopup id="help-popup">
+        <menuitem label="About..." accesskey="a" oncommand="window.openDialog('chrome://xulnpg/content/about.xul','','centerscreen');"/>
+      </menupopup>
+    </menu>
+  </menubar>
+
+
+
+
+
+</overlay>

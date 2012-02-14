@@ -1,0 +1,5 @@
+content qcinterop file:chrome/content/main.xul
+resource js       			js/
+resource html     			html/
+resource d3       			d3/
+resource content/dialog   	dialog/

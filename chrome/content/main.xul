@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+ <!-- Stylesheet processing directives here -->
+
+<?xml-stylesheet href="qcinterop.css" type="text/css"?>
+
+ <!-- Overlays imported here -->
+
+<?xul-overlay  href="chrome://qcinterop/content/menu_overlay.xul"?>
+<?xul-overlay  href="chrome://qcinterop/content/status_overlay.xul"?>
+
+
+
+<window id="main" title="XulSAV" width="700" height="900" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	onload="init()">
+
+  <!-- Main layout XML here -->
+
+	<menubar id="menubar1">
+       <!-- menu_overlay.xul flowed in here -->
+    </menubar>
+
+	<separator class="thin"/>
+
+	<hbox>
+		<button label="Open..." onclick="openLoadDialog();"/>
+		<textbox flex="3" id="datapath" value="/nfs/avc_private/avc/Desktop/InterOp"/>
+		<!-- textbox flex="3" id="interopdir" value="/home/avc/Desktop/InterOp"/ -->
+
+		<button label="Load" id="loadbutton" disabled='true' onclick="loadData();"/>
+	</hbox>
+
+	<separator class="thin"/>
+
+	<tabbox id="tablist" flex="1">
+	  <tabs>
+		<!-- tab elements go here -->
+		<tab label="QCMetrics"/>
+		<tab label="Tile Map"/>
+	  </tabs>
+	  <tabpanels flex="1">
+		<!-- tabpanel elements go here -->
+		<tabpanel id="qcmetricstab">
+			<iframe id="chartFrame" flex="1" type="chrome" src="resource://html/chart.html" />
+		</tabpanel>
+		<tabpanel id="tilemaptab" flex="1">
+			<groupbox>
+			<caption value="tilemap"/>
+			</groupbox>
+		</tabpanel>
+	  </tabpanels>
+	</tabbox>
+
+
+	<textbox multiline="true" id="qcdump" value="" rows="5"/>
+	<hbox>
+		<spacer flex="1"/>
+		<button label="Dump QC Data Summary" onclick="dumpQcSummary()"/>
+		<button label="Quit" onclick="appExit()"/>
+	</hbox>
+
+
+   <statusbar id="statusbar1">
+        <!-- status_overlay.xul flowed in here -->
+    </statusbar>
+
+
+	<!-- remote chrome scripts here -->
+	<script type="application/javascript" src="chrome://qcinterop/content/main.js" />
+	<!-- remote resource scripts here (location mapped via entries in applicatgion manifest -->
+	<script type="application/javascript" src="resource://js/appUtils.js" />
+	<script type="application/javascript" src="resource://js/parseInterOp.js" />
+	<script type="application/javascript" src="resource://js/arrayFilter.js" />
+
+	<!-- inline script here -->
+    <script type="text/javascript">
+    <![CDATA[
+
+    function init() {
+		dump("Console debug started..." + '\n');
+		setLoadDataButtonState();
+	}
+
+
+    ]]>
+    </script>
+
+</window>
